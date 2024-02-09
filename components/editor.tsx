@@ -26,6 +26,12 @@ interface EditorProps {
   const { resolvedTheme } = useTheme();
   const { edgestore } = useEdgeStore();
 
+  type MyBlockType = {}; // Example type for block
+
+type MyAttributeType = {}; // Example type for attributes
+
+type MyDataType = {};
+
   const handleUpload = async (file: File) => {
     const response = await edgestore.publicFiles.upload({ 
       file
@@ -38,7 +44,7 @@ interface EditorProps {
     editable,
     initialContent: 
       initialContent 
-      ? JSON.parse(initialContent) as PartialBlock[] 
+      ? JSON.parse(initialContent) as PartialBlock<MyBlockType, MyAttributeType, MyDataType>[] 
       : undefined,
     onEditorContentChange: (editor) => {
       onChange(JSON.stringify(editor.topLevelBlocks, null, 2));
